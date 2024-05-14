@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:patterns_codelabs/models/data.dart';
+import 'package:patterns_codelabs/screens/document_screen.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const DocumentApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class DocumentApp extends StatelessWidget {
+  const DocumentApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
+      home: DocumentScreen(
+        document: Document(),
       ),
     );
   }
