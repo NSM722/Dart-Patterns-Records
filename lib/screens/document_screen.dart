@@ -16,7 +16,10 @@ class DocumentScreen extends StatelessWidget {
 
     /// destructure the record into local variables
     /// this is a record pattern (title, modified: modified)
-    final (title, modified: modified) = document.metadata;
+    /// final (title, modified: modified) = document.metadata;
+
+    /// refactor the above pattern
+    final (title, :modified) = document.metadata;
 
     return Scaffold(
       appBar: AppBar(
