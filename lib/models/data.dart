@@ -20,6 +20,17 @@ class Document {
       throw const FormatException('Unexpected JSON');
     }
   }
+
+  List<Block> getBlocks() {
+    /// return a list of Block objects
+    if (_json case {'blocks': List blocksJson}) {
+      /// use a 'collection for' to create a list of Block objects
+      /// without patterns, one would need the toList() method to cast
+      return [for (final blockJson in blocksJson) Block.fromJson(blockJson)];
+    } else {
+      throw const FormatException('Unexpected JSON format');
+    }
+  }
 }
 
 class Block {
