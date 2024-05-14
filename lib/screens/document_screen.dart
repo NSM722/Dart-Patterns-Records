@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patterns_codelabs/models/data.dart';
+import 'package:patterns_codelabs/widgets/block.dart';
 
 class DocumentScreen extends StatelessWidget {
   final Document document;
@@ -22,6 +23,9 @@ class DocumentScreen extends StatelessWidget {
     /// this is a variable declaration pattern(irrefutable pattern)
     final (title, :modified) = document.metadata;
 
+    /// contains the list of Block objects
+    final blocks = document.getBlocks();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,9 +34,17 @@ class DocumentScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Center(
-            child: Text(
-              'Last modified: $modified',
+          Text(
+            'Last modified: $modified',
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: blocks.length,
+              itemBuilder: (context, index) {
+                return BlockWidget(
+                  block: blocks[index],
+                );
+              },
             ),
           ),
         ],
