@@ -7,18 +7,19 @@ class Document {
 
   /// create a getter that returns a record
   (String, {DateTime modified}) get metadata {
-    const title = 'My Document';
-    final now = DateTime.now();
-
-    /// this return type is a record with two fields
-    /// the first field is a string, the second field is a DateTime
-    /// the return statement constructs a new record by enclosing
-    /// the two values in parentheses, the first field is positional
-    /// & unnamed, the second field is named
-    return (
-      title,
-      modified: now,
-    );
+    /// read values from the _json map
+    if (_json.containsKey('metadata')) {
+      final metadataJson = _json['metadata'];
+      if (metadataJson is Map) {
+        final title = metadataJson['title'] as String;
+        final localModified = DateTime.parse(metadataJson['modified'] as String);
+        return (
+          title,
+          modified: localModified,
+        );
+      }
+    }
+    throw const FormatException('Unexpected JSON');
   }
 }
 
