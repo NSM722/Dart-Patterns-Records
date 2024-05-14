@@ -22,6 +22,28 @@ class Document {
   }
 }
 
+class Block {
+  final String type;
+  final String text;
+
+  Block(this.type, this.text);
+
+  /// create instances of the Block class from JSON data
+  /// by using the .fromJson() factory constructor without
+  /// manually parsing the JSON data every time
+  factory Block.fromJson(Map<String, Object?> json) {
+    if (json
+        case {
+          'type': String type,
+          'text': String text,
+        }) {
+      return Block(type, text);
+    } else {
+      throw const FormatException('Unexpected JSON');
+    }
+  }
+}
+
 /// mocking incoming JSON data
 const documentJson = '''
 {
