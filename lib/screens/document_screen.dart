@@ -19,6 +19,7 @@ class DocumentScreen extends StatelessWidget {
     /// final (title, modified: modified) = document.metadata;
 
     /// refactor the above pattern
+    /// this is a variable declaration pattern(irrefutable pattern)
     final (title, :modified) = document.metadata;
 
     return Scaffold(
