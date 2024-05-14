@@ -6,20 +6,19 @@ class Document {
   Document() : _json = jsonDecode(documentJson);
 
   /// create a getter that returns a record
+  /// read JSON values using a map pattern
   (String, {DateTime modified}) get metadata {
-    /// read values from the _json map
-    if (_json.containsKey('metadata')) {
-      final metadataJson = _json['metadata'];
-      if (metadataJson is Map) {
-        final title = metadataJson['title'] as String;
-        final localModified = DateTime.parse(metadataJson['modified'] as String);
-        return (
-          title,
-          modified: localModified,
-        );
-      }
+    if (_json
+        case {
+          'metadata': {
+            'title': String title,
+            'modified': String localModified,
+          }
+        }) {
+      return (title, modified: DateTime.parse(localModified));
+    } else {
+      throw const FormatException('Unexpected JSON');
     }
-    throw const FormatException('Unexpected JSON');
   }
 }
 
