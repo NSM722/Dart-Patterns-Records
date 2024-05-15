@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patterns_codelabs/main.dart';
 import 'package:patterns_codelabs/models/data.dart';
 import 'package:patterns_codelabs/widgets/block.dart';
 
@@ -26,6 +27,8 @@ class DocumentScreen extends StatelessWidget {
     /// contains the list of Block objects
     final blocks = document.getBlocks();
 
+    final formattedDate = formatDate(modified);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -35,7 +38,7 @@ class DocumentScreen extends StatelessWidget {
       body: Column(
         children: [
           Text(
-            'Last modified: $modified',
+            'Last modified: $formattedDate',
           ),
           Expanded(
             child: ListView.builder(
