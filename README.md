@@ -77,7 +77,7 @@ Destructuring lets you unpack values from an object to assign them to local vari
 
 Patterns are used in switch statements, switch expressions, and if-case statements.
 
-They compare against against actual values to determine if they **_match_**
+They compare against actual values to determine if they **_match_**
 
 ```dart
 /// destructure the record into local variables
@@ -91,7 +91,7 @@ The record pattern `(title, modified: modified)` contains two variable **_patter
 
 - Because they match, the variable declaration pattern destructures the expression, accessing its values and binding them to new local variables of the same types and names, String title and DateTime modified.
 
-'Refutable patterns' are used in control flow contexts:
+`Refutable patterns` are used in control flow contexts:
 
 - They expect that some values they compare against will not match.
 - They are meant to influence the control flow, based on whether or not the value matches.
@@ -174,7 +174,7 @@ This code validates the following:
 - \_json['metadata'] contains the keys title and modified.
 - title and localModified are strings and aren't null.
 
-If the value doesn't match, the pattern `refutes` (refuses to continue execution) and proceeds to the **else** clause. If the match is successful, the pattern destructures the values of **title** and **modified **from the map and binds them to new local variables.
+If the value doesn't match, the pattern `refutes` (refuses to continue execution) and proceeds to the **else** clause. If the match is successful, the pattern destructures the values of **title** and **modified** from the map and binds them to new local variables.
 
 ### switch expressions vs switch statements
 
@@ -190,7 +190,7 @@ TextStyle? textStyle;
     switch (block.type) {
       case 'h1':
         textStyle = Theme.of(context).textTheme.displayMedium;
-      case 'p':
+      case 'p' || 'checkbox':
         textStyle = Theme.of(context).textTheme.bodyMedium;
 
       /// this wildcard pattern (_) is used to handle all other cases
