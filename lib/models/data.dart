@@ -33,26 +33,42 @@ class Document {
   }
 }
 
-class Block {
-  final String type;
-  final String text;
-
-  Block(this.type, this.text);
+/// 'sealed' keyword is a class modifier that restricts the
+/// inheritance of a class to the same file i.e you can only
+/// extend or implement this class in the same library
+sealed class Block {
+  Block();
 
   /// create instances of the Block class from JSON data
   /// by using the .fromJson() factory constructor without
   /// manually parsing the JSON data every time
   factory Block.fromJson(Map<String, Object?> json) {
-    if (json
-        case {
-          'type': String type,
-          'text': String text,
-        }) {
-      return Block(type, text);
-    } else {
-      throw const FormatException('Unexpected JSON');
-    }
+    return switch (json) {
+      {'type': 'h1', 'text': String text} => HeaderBlock(text),
+      {'type': 'p', 'text': String text} => ParagraphBlock(text),
+      {'type': 'checkbox', 'text': String text, 'checked': bool checked} =>
+        CheckboxBlock(text, checked),
+      _ => throw const FormatException('Unexpected JSON format'),
+    };
   }
+}
+
+/// subclasses of Block to represent
+///  different types of blocks
+class HeaderBlock extends Block {
+  final String text;
+  HeaderBlock(this.text);
+}
+
+class ParagraphBlock extends Block {
+  final String text;
+  ParagraphBlock(this.text);
+}
+
+class CheckboxBlock extends Block {
+  final String text;
+  final bool isChecked;
+  CheckboxBlock(this.text, this.isChecked);
 }
 
 /// mocking incoming JSON data
