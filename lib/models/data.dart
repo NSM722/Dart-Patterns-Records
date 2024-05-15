@@ -89,7 +89,7 @@ const documentJson = '''
     },
     {
       "type": "checkbox",
-      "checked": false,
+      "checked": true,
       "text": "Learn Dart 3"
     }
   ]
